@@ -8,4 +8,10 @@ int main(void)
 
     printf("x is %d, y is %f\n", x, y);
     printf("%s\n", s);
+
+    for (int i = 0; i < 5; i++)
+    {
+        int product = 5 * i;
+        printf("%d x 5 = %d\n", i, product);
+    }
 }
