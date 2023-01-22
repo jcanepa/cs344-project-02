@@ -2,5 +2,8 @@
 
 int main(void)
 {
-    printf("%s\n", "Hello, world!");
+    int x = 12;
+    float y = 3.14;
+    char *s = "Hello, world!";
+    printf("%s\n", s);
 }
