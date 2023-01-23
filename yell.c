@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <ctype.h> // to upper
 
 void read_write_from_file(const char *filename)
 {
