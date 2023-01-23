@@ -9,13 +9,13 @@ void read_write_from_file(const char *filename)
     char *contents;
     int bytes;
 
-    /* Use syscall to read input file in read-only mode */
+    /* Read input file in read-only mode */
     file_descriptor = open(filename, O_RDONLY, 0);
 
-    /* Throw error if specified file doesn't exist */
+    /* Error & return if specified file doesn't exist */
     if (file_descriptor == -1)
     {
-        perror("Specified file does not exist");
+        perror("File name specified does not exist");
         exit(1);
     }
 
@@ -32,20 +32,21 @@ void read_write_from_file(const char *filename)
 
 int main(int argc, const char *argv[])
 {
-    char *buffer = (char *)malloc(2048);
 
     // no arguments provided
     if (argc == 1)
     {
         // read from standard input
-        while (read(0, buffer, sizeof(buffer)) > 0)
+        char buffer[2048] = {'\0'};
+
+        while (read(0, buffer, 2048) > 0)
         {
             write(1, buffer, 2048);
         }
         exit(0);
     }
 
-    // otherwise, process each supplied arg as a filename
+    // Process each supplied arg as a filename
     for (int i = 1; i < argc; i++)
     {
         read_write_from_file(argv[i]);
