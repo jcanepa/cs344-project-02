@@ -38,7 +38,7 @@ int main(int argc, const char *argv[])
     if (argc == 1)
     {
         // read from standard input
-        while (read(0, buffer, sizeof(buffer)) != 0)
+        while (read(0, buffer, sizeof(buffer)) > 0)
         {
             write(1, buffer, 2048);
         }
@@ -46,7 +46,7 @@ int main(int argc, const char *argv[])
     }
 
     // otherwise, process each supplied arg as a filename
-    for (int i = 0; i < argc; i++)
+    for (int i = 1; i < argc; i++)
     {
         read_write_from_file(argv[i]);
     }
