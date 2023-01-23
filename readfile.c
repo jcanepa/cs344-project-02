@@ -12,7 +12,7 @@ int main(int argc, const char *argv[])
     if (argc != 2)
     {
         perror("Incorrect number of arguments.");
-        exit(0);
+        exit(1);
     }
 
     /* Use syscall to read input file in read-only mode */
@@ -22,7 +22,7 @@ int main(int argc, const char *argv[])
     if (file_descriptor < 0)
     {
         perror("Specified file does not exist");
-        exit(0);
+        exit(1);
     }
 
     /* Allocate enough space to contain the file contents in memory. */
