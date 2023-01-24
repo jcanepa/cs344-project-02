@@ -3,14 +3,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-void read_write_from_file(const char *filename)
+void read_write_from_file(int file_descriptor)
 {
-    int file_descriptor;
     char *contents;
     int bytes;
-
-    /* Read input file in read-only mode */
-    file_descriptor = open(filename, O_RDONLY, 0);
 
     /* Error & return if specified file doesn't exist */
     if (file_descriptor == -1)
@@ -38,9 +34,10 @@ int main(int argc, const char *argv[])
         // read from standard input
         char buffer[2048] = {'\0'};
 
-        while (read(0, buffer, 2048) > 0)
+        while (1)
         {
-            write(1, buffer, 2048);
+            int count = read(0, buffer, 2048);
+            write(1, buffer, count);
         }
         exit(0);
     }
@@ -48,6 +45,11 @@ int main(int argc, const char *argv[])
     // Process each supplied arg as a filename
     for (int i = 1; i < argc; i++)
     {
-        read_write_from_file(argv[i]);
+
+        int file_descriptor;
+
+        /* Read input file in read-only mode */
+        file_descriptor = open(argv[i], O_RDONLY, 0);
+        read_write_from_file(file_descriptor);
     }
 }
